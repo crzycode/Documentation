@@ -1,0 +1,133 @@
+    <script type="text/javascript">
+               
+
+                // for password hide and show option
+                $(document).ready(
+                    function () {
+                        $('#btn_update').hide();
+                        Postdata();
+                        Getdata();
+                        UpdateData();
+                        
+                    }
+                );
+                function Deleteclick(ProductId) {
+                    console.log(ProductId);
+                    $.ajax({
+                        type: 'delete',
+                        url: 'https://localhost:44322/Home/Removedata/' + ProductId,
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            console.log(data);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    })
+                    Getdata();
+                };
+                function Postdata() {
+                    $('#btn_save').click(function () {
+                        var obj = {
+
+                            Firstname: $('#first_name').val(),
+                            Lastname: $('#last_name').val(),
+                            Email: $('#email').val()
+                        }
+                        $.ajax({
+                            type: 'post',
+                            url: 'https://localhost:44322/Home/Addproduct',
+                            dataType: 'json',
+                            contentType: 'application/json; charset=utf-8',
+                            data: JSON.stringify(obj),
+                            success: function (data) {
+                                console.log(data);
+                               
+                            },
+                            error: function (error) {
+                                console.log(error)
+                            }
+                        })
+                        console.log(obj); 
+                        $('#first_name').val(' '),
+                            $('#last_name').val(' '),
+                            $('#email').val(' ')
+                    });
+                 
+                   
+                };
+                function Getdata() {
+                    $.ajax({
+                        async: 'true',
+                        type: 'get',
+                        url: 'https://localhost:44322/Home/Getallproducts',
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'JSON',
+                        success: function (data) {
+                            var html = '';
+                            $.each(data, function (key, value) {
+                                html += '<tr>'
+                                html += '<td >' + value.ProductId + '</td>'
+                                html += '<td>' + value.Firstname + '</td>'
+                                html += '<td>' + value.Lastname + '</td>'
+                                html += '<td>' + value.Email + '</td>'
+                                html += '<td><input type="Button"  value="Edit" onclick = "Editclick(' + value.ProductId + ')"/>'
+                                html += '<input type="Button" value="Delete" onclick = "Deleteclick(' + value.ProductId + ')"/>'
+                                html += '</td>'
+                                html += '</tr>'
+                            });
+                            $('.tbody').html(html);
+                           
+                     
+                        }
+
+                    });
+                };
+                function Editclick(id) {
+                    $.ajax({
+                        async: 'true',
+                        type: 'get',
+                        url: 'https://localhost:44322/Home/EditData/' + id,
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'JSON',
+                        success: function (data) {
+                            $('#first_name').val(data.Firstname),
+                                $('#last_name').val(data.Lastname),
+                                $('#email').val(data.Email)
+                            $('#id').val(data.ProductId)
+                            $('#btn_save').hide();
+                            $('#btn_update').show();
+
+                        },
+                        error: function (error) {
+
+                        }
+                    });
+
+                }
+                function UpdateData() {
+                    $('#btn_update').click(function () {
+                        var obj = {
+
+                            Firstname: $('#first_name').val(),
+                            Lastname: $('#last_name').val(),
+                            Email: $('#email').val(),
+                            ProductId: $('#id').val()
+                        }
+                        $.ajax({
+                            type: 'put',
+                            url: 'https://localhost:44322/Home/Updatedata',
+                            dataType: 'json',
+                            contentType: 'application/json; charset=utf-8',
+                            data: JSON.stringify(obj),
+                            success: function (data) {
+                                console.log(data);
+                            },
+                            error: function (error) {
+                                console.log(error)
+                            }
+                        })
+
+                    });
+                    };
+            </script>
