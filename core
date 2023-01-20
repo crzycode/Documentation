@@ -1,3 +1,71 @@
 NuGet\Install-Package Microsoft.EntityFrameworkCore.Tools -Version 6.0.12
 NuGet\Install-Package Microsoft.EntityFrameworkCore -Version 6.0.12
 NuGet\Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 6.0.12
+
+create connection string ------------------------>
+ "ConnectionStrings": {
+    "connection": "Data Source = DESKTOP-83C4JL9\\KALI; Initial Catalog = Medical_shop; Integrated Security = True;"
+  }
+  
+create datacontext 
+ public DataContext(DbContextOptions<DataContext> options):base(options)
+        {
+
+        }
+
+create middleware ------------------------->
+builder.Services.AddDbContext<DataContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("connection"));
+});
+
+add cors ------------------>
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("mypolicy", builder =>
+    {
+        builder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+       
+    });
+});
+
+use this as
+app.UseCors("mypolicy");
+
+
+use the interface in program file
+builder.Services.AddTransient<IInsert, Insert_>();
+
+
+model builder
+
+ protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product_brand>(c =>
+            {
+                c.HasNoKey();
+                c.ToView("product_brand");
+            });
+            modelBuilder.Entity<Citysearch>(c =>
+            {
+                c.HasNoKey();
+            });
+            modelBuilder.Entity<product_page>(c =>
+            {
+                c.HasNoKey();
+                c.ToView("product_page");
+            });
+            modelBuilder.Entity<search_brand>(c =>
+            {
+                c.HasNoKey();
+                c.ToView("search_brand");
+            });
+            modelBuilder.Entity<vw_product_details>(c =>
+            {
+                c.HasNoKey();
+                c.ToView("vw_product_details");
+
+            });
+        }
