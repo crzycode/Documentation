@@ -1,6 +1,7 @@
 ng add @ngrx/store@14
 ng add @angular/material@14
 ng add @ngrx/store-devtools@14
+ng add @ngrx/effects@14   
 ng add @ng-bootstrap/ng-bootstrap@13.0.0
-npm install primeng --force
-npm install primeicons --force -->
+npm install primeng@14 --force
+npm install primeicons@14 --force -->
