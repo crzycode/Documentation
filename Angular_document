@@ -5,3 +5,11 @@ ng add @ngrx/effects@14
 ng add @ng-bootstrap/ng-bootstrap@13.0.0
 npm install primeng@14 --force
 npm install primeicons@14 --force -->
+
+npm install jquery -- save
+
+"scripts": [
+  "node_modules/jquery/dist/jquery.min.js"
+]
+
+declare var $: any;
