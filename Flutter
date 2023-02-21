@@ -1,0 +1,12 @@
+Post 
+
+  postdata() async {
+    var m = {"username": "mangal", "password": "hellos"};
+    var json = jsonEncode(m);
+    var response = await http.post(
+        Uri.parse("https://localhost:7054/api/Users"),
+        headers: {"Content-Type": "application/json"},
+        body: json,
+        encoding: Encoding.getByName("utf-8"));
+    datas = response.body;
+  }
