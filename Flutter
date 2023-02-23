@@ -1,3 +1,10 @@
+required library
+
+flutter pub add path_provider
+flutter pub add hive
+flutter pub add hive_flutter
+flutter pub add get
+dart pub add dio == Initialize final dio = Dio();
 Post 
 
   postdata() async {
