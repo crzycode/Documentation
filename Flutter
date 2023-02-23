@@ -5,7 +5,8 @@ flutter pub add hive == import 'package:hive/hive.dart';
 flutter pub add hive_flutter == import 'package:hive_flutter/hive_flutter.dart';
 initalizer
 void main() async {
-  await Hive.initFlutter();
+ Directory document = await getApplicationDocumentsDirectory();
+  Hive.init(document.path);
   await Hive.openBox("Mydata");
   runApp(MyApp());
 }
