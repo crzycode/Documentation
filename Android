@@ -1,0 +1,16 @@
+Download android Command line tools
+
+got to bin folder
+
+type:sdkmanager --list
+Select android image:sdkmanager --install system-images;android-33;google_apis;x86_64
+
+install build_tool:sdkmanager "build-tools;27.0.3"
+
+Platform:sdkmanager "platform-tools" "platforms;android-33"
+
+Create AVD:avdmanager create avd --name android33 --package "system-images;android-33;google_apis;x86_64"
+
+
+
+Goto Emulater Folder:emulator –avd android33 -qemu -m 3000
