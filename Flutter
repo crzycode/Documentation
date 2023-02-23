@@ -1,10 +1,11 @@
 required library
 
-flutter pub add path_provider
-flutter pub add hive
-flutter pub add hive_flutter
-flutter pub add get
-dart pub add dio == Initialize final dio = Dio();
+flutter pub add path_provider == import 'package:path_provider/path_provider.dart';
+flutter pub add hive == import 'package:hive/hive.dart';
+flutter pub add hive_flutter == import 'package:hive_flutter/hive_flutter.dart';
+flutter pub add get ==import 'package:get/get.dart';
+dart pub add dio == import 'package:dio/dio.dart';
+Initialize final dio = Dio();
 Post 
 
   postdata() async {
