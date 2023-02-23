@@ -30,7 +30,9 @@ flutter pub add get ==import 'package:get/get.dart';
 dart pub add dio == import 'package:dio/dio.dart';
 Initialize final dio = Dio();
 
-flutter pub add flutter_inset_box_shadow == import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+flutter pub add flutter_inset_box_shadow
+import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 Post 
 
   postdata() async {
