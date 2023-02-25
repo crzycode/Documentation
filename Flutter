@@ -37,6 +37,9 @@ import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 flutter pub add flutter_local_notifications
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+flutter pub add shared_preferences
+import 'package:shared_preferences/shared_preferences.dart';
+
 Post 
 
   postdata() async {
