@@ -13,3 +13,7 @@ npm install jquery -- save
 ]
 
 declare var $: any;
+
+
+pagination
+https://stackblitz.com/edit/angular-pagination-logic?file=src%2Fapp%2Fapp.component.ts
