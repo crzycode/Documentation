@@ -17,3 +17,6 @@ declare var $: any;
 
 pagination
 https://stackblitz.com/edit/angular-pagination-logic?file=src%2Fapp%2Fapp.component.ts
+
+add dynamic field
+https://stackblitz.com/edit/angular-dynamic-field/?file=src%2Fapp%2Fapp.component.html
