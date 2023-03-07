@@ -1,0 +1,228 @@
+
+ts file 
+ ngOnInit(): void {
+   
+    this.forms.select('form_change').subscribe(air =>{
+      console.log(air.forms)
+      if(air.forms == "misc"){
+        this.close_ng_tyle.transform = "translateX(90%);";
+        this.close_ng_tyle.width = "90%"
+
+        this.forms_container = true
+      }
+      
+     })
+     this.form_data();
+  }
+
+  form_data(){
+   
+this.misc_form = this.fb.group({
+  company:[''],
+  emp_name:[''],
+  debit_to:[''],
+  auth_by:[''],
+  passed_to:[''],
+  misc_expenses:this.fb.array([
+     this.fb.group({
+      expense_type:[''],
+      expense_details:[''],
+      billing:['']
+    })
+  ])
+})
+  }
+
+  add_misc(){
+
+    const control = <FormArray>this.misc_form.controls['misc_expenses'];
+    control.push(   this.fb.group({
+      expense_type:[''],
+      expense_details:[''],
+      billing:['']
+    }))
+   
+  }
+
+  getControls() {
+    return (this.misc_form.get('misc_expenses') as FormArray).controls;
+  }
+
+  removemisc_form(id:any){
+    const control = <FormArray>this.misc_form.controls['misc_expenses'];
+
+    control.removeAt(id.value);
+  }
+  submitdata(){
+   var d = this.misc_form.value
+
+    console.log(d)
+  }
+  
+  
+  -------------------------------------------------------html
+  <div class="forms_container" *ngIf="forms_container">
+    <div class="forms_wrapper" [ngClass]="animation" [ngStyle]="close_ng_tyle">
+        <div class="both_wrapper">
+            <form [formGroup]="misc_form">
+                <div class="row d-flex justify-content-between p-2 px-4">
+                    <div class="col-6 h3">Enter Travel Booking/Miscellaneous</div>
+                    <div class="col-6  d-flex justify-content-end align-items-center">
+                        <span class="close_form_button d-flex justify-content-center align-items-center" (click)="close_form()"><img src="../../../assets/close_form_.svg" alt=""></span>
+                    </div>
+                </div>
+                <div class="row air_details m-0 p-1 px-4">Personal Details</div>
+                <div class="row px-4 p-2 d-flex">
+                    <div class=" col-2 input_fields selector p-1 position-relative ">
+                        <div class="feild_title px-2">Company</div>
+                        <div class="icon_input_text d-flex align-items-center position-relative w-100"
+                            (click)="dropdown('company')"  appClickedOutside (clickoutside)="click_outside('company')">
+                            <input class="input_text w-100" formControlName="company" style="font-size: 13px; font-weight: 600; height: 28px;" type="text" placeholder="Portall">
+                            <span class="selector_icon_click">
+                                <img class="selector_icon" src="../../../assets/selector_icon.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="dropdown_select" *ngIf="drop_down_selector_company">
+                            <div class="d-flex justify-content-start px-2">masfnasl</div>
+                            <div class="d-flex justify-content-start px-2">masfnasl</div>
+                            <div class="d-flex justify-content-start px-2">masfnasl</div>
+                        </div>
+                    </div>
+                    <div class=" col-2 input_fields p-1 position-relative">
+                        <div class="feild_title px-2">Employee Name</div>
+                        <div class="icon_input_text_field d-flex align-items-center position-relative w-100">
+                            <input class="input_text w-100" formControlName="emp_name" style="font-size: 13px; font-weight: 600; height: 28px;" type="text" placeholder="Portall">
+                        </div>
+                      
+                    </div>
+                </div>
+                <div class="row air_details m-0 p-1 px-4">Company Details</div>
+                <div class="row px-4 p-2 d-flex">
+                    <div class=" col-2 input_fields selector p-1 position-relative">
+                        <div class="feild_title px-2">Debited to</div>
+                        <div class="icon_input_text d-flex align-items-center position-relative w-100"
+                            (click)="dropdown('debit_to')" appClickedOutside (clickoutside)="click_outside('debit_to')">
+                            <input class="input_text w-100" formControlName="debit_to" style="font-size: 13px; font-weight: 600; height: 28px;" type="text" placeholder="Portall" >
+                            <span class="selector_icon_click">
+                                <img class="selector_icon" src="../../../assets/selector_icon.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="dropdown_select" *ngIf="drop_down_selector_debit_to">
+                            <div class="d-flex justify-content-start px-2">masfnasl</div>
+                            <div class="d-flex justify-content-start px-2">masfnasl</div>
+                            <div class="d-flex justify-content-start px-2">masfnasl</div>
+                        </div>
+                    </div>
+                    <div class=" col-2 input_fields selector p-1 position-relative ">
+                        <div class="feild_title px-2">Authorised By</div>
+                        <div class="icon_input_text d-flex align-items-center position-relative w-100"
+                            (click)="dropdown('auth')" appClickedOutside (clickoutside)="click_outside('auth')">
+                            <input class="input_text w-100" formControlName="auth_by" style="font-size: 13px; font-weight: 600; height: 28px;" type="text" placeholder="Portall">
+                            <span class="selector_icon_click">
+                                <img class="selector_icon" src="../../../assets/selector_icon.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="dropdown_select" *ngIf="drop_down_selector_authorised">
+                            <div class="d-flex justify-content-start px-2">masfnasl</div>
+                            <div class="d-flex justify-content-start px-2">masfnasl</div>
+                            <div class="d-flex justify-content-start px-2">masfnasl</div>
+                        </div>
+                    </div>
+                    <div class=" col-2 input_fields selector p-1 position-relative ">
+                        <div class="feild_title px-2">Passed To</div>
+                        <div class="icon_input_text d-flex align-items-center position-relative w-100"
+                            (click)="dropdown('passedto')" appClickedOutside (clickoutside)="click_outside('passedto')">
+                            <input class="input_text w-100" formControlName="passed_to" style="font-size: 13px; font-weight: 600; height: 28px;" type="text" placeholder="Portall">
+                            <span class="selector_icon_click">
+                                <img class="selector_icon" src="../../../assets/selector_icon.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="dropdown_select" *ngIf="drop_down_selector_passedto">
+                            <div class="d-flex justify-content-start px-2">masfnasl</div>
+                            <div class="d-flex justify-content-start px-2">masfnasl</div>
+                            <div class="d-flex justify-content-start px-2">masfnasl</div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="row air_details m-0 p-1 px-4">Miscellaneous Expenses</div>
+                <div formArrayName="misc_expenses"  class=" row px-4 p-2 align-items-center position-relative">
+                    <div *ngFor="let child of getControls() ; let i = index" class="expenses_add_form" >
+                        <div formGroupName="{{i}}">
+                            <div class="row">
+                                <div class=" col-2 input_fields p-1 position-relative">
+                                    <div class="feild_title px-2">Type of expense</div>
+                                    <div class="icon_input_text_field d-flex align-items-center position-relative w-100">
+                                        <input class="input_text w-100" formControlName="expense_type" style="font-size: 13px; font-weight: 600; height: 28px;" type="text" placeholder="Portall">
+                                    </div>
+                                  
+                                </div>
+                                <div class=" col-2 input_fields p-1 position-relative">
+                                    <div class="feild_title px-2">Expense in detail</div>
+                                    <div class="icon_input_text_field d-flex align-items-center position-relative w-100">
+                                        <input class="input_text w-100" formControlName="expense_details" style="font-size: 13px; font-weight: 600; height: 28px;" type="text" placeholder="Portall">
+                                    </div>
+                                  
+                                </div>
+                                <div class=" col-2 input_fields p-1 position-relative">
+                                    <div class="feild_title px-2">Billing (INR)</div>
+                                    <div class="icon_input_text_field d-flex align-items-center position-relative w-100">
+                                        <input class="input_text w-100" formControlName="billing" style="font-size: 13px; font-weight: 600; height: 28px;" type="text" placeholder="Portall">
+                                    </div>
+                                  
+                                </div>
+                                <div class=" col-2 input_fields p-1 position-relative">
+                                   <button mat-raised-button style="background: #2A7B9B; color:white; border-radius: 5px;" (click)="removemisc_form(i)">-</button>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class=" col-2 input_fields p-1 position-relative">
+                        <button mat-raised-button style="background: #2A7B9B; color:white; border-radius: 5px;" (click)="add_misc()">+</button>
+                       
+                     </div>
+                   
+                    
+           
+                    <div class="col-2 submit_div_button d-flex justify-content-end">
+                        <button mat-raised-button style="background: #2A7B9B; color:white; border-radius: 12px; width: 100%;" (click)="submitdata()">Submit</button>
+                    </div>
+                </div>
+               </form>
+                <div class="row air_details m-0 p-1 px-4 ">Entered Deatlis</div>
+                <div class="d-flex justify-content-center p-4">
+                    <table class="declensionTable">
+                        <thead class="w-100 travel_list_title">
+                          <tr class="" style="font-size: 14px;"> 
+                            <th class="start_thead">Debited to</th>
+                            <th class="table_head">Company</th>
+                            <th class="table_head">Employee Name</th>
+                            <th class="table_head">Authorised By</th>
+                            <th class="table_head">Passed To</th>
+                            <th class="table_head">Expense</th>
+                            <th class="table_head">Billing (INR)</th>
+                        
+        
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>sdfdsf</td>
+                            <td>sdfsf</td>
+                            <td>dfsf</td>
+                            <td>sfdsdf</td>
+                            <td>sdfsd</td>
+                            <td>sdfsdf</td>
+                            <td>sdfdsf</td>
+                          
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+        </div>
+       
+    </div>
+</div>
