@@ -1,0 +1,157 @@
+import { ISelect } from "./ISelect"
+
+export interface IDispatch {
+    menu_dispatch(data: any): any
+    form_dispatch(data: any): any
+    visa_dispatch(data: any): any
+    download_dispatch(data: any): any
+    close_dispatch(data: any): any
+    update_dispatch(data: any): any
+    upload_dispatch(data: any): any
+    emp_store_dispatch(data: any): any
+    nav_bar_dispatch(data: any): any
+    company_filter_dispatch(data: any): any
+    filter_employee_dispatch(data: any): any
+    view_employee_dispatch(data: any): any
+    search_dispatch(data: any): any
+    employee_master_dispatch(data:any):any
+    company_master_dispatch(data:any):any
+    navigation_page_dispatch(data:any):any
+    travel_download_dispatch(data:any):any
+    visa_download_dispatch(data:any):any
+    passport_download_dispatch(data:any):any
+    
+} 
+
+
+
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { IDispatch } from './IDispatch';
+
+
+import { Menu_change_action, Form_change_action, visa_search_action, download_type_action, closeform_action, update_list_action, invoice_upload_action, emp_action, on_action, company_filter_action, employee_filter_action, view_list_action, search_action, Add_employee_action, Add_company_action, navigation_action, travel_download_action, visa_download_action, passport_download_action } from './Store.action';
+import { Form_state, visa_search_data, download_type_state, viewdata, close_form_state, update_list, invoice_state, employee_id, navigate_employee, company_name_search, filter_employee, Menu, search_data, get_master_data, navigate_page, donwload } from './Store.state';
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class StoreDispatchService implements IDispatch{
+  constructor(
+    private Menu: Store<{ menu_change: Menu }>,
+    private form: Store<{ form_change: Form_state }>,
+    private visa_search: Store<{ visa_search: visa_search_data }>,
+    private download: Store<{ download_type_state: download_type_state }>,
+    private view:Store<{view_select_:viewdata}>,
+    private close_:Store<{close:close_form_state}>,
+    private update: Store<{ update_change: update_list }>,
+    private upload:Store<{invoice:invoice_state}>,
+    private emp_store: Store<{ emp_id: employee_id }>,
+    private nav_bar: Store<{ open_form: navigate_employee }>,
+    private company_search: Store<{ company_filter: company_name_search }>,
+    private filter_emp: Store<{ filter: filter_employee }>,
+    private search:Store<{search:search_data}>,
+    private emp_master:Store<{emp_select:get_master_data}>,
+    private comp_master:Store<{comp_select:get_master_data}>,
+    private nav:Store<{nav:navigate_page}>,
+    private travel_download:Store<{Download_travel:donwload}>,
+    private visa_download:Store<{Download_visa:donwload}>,
+    private passport_download:Store<{Download_passport:donwload}>
+
+
+  ) { }
+  travel_download_dispatch(data: any) {
+    this.travel_download.dispatch(travel_download_action({value:data}))
+  }
+  visa_download_dispatch(data: any) {
+    this.visa_download.dispatch(visa_download_action({value:data}))
+  }
+  passport_download_dispatch(data: any) {
+    this.passport_download.dispatch(passport_download_action({value:data}))
+  }
+
+  navigation_page_dispatch(data: any) {
+   this.nav.dispatch(navigation_action({value:data}))
+  }
+  employee_master_dispatch(data: any) {
+   
+    this.emp_master.dispatch(Add_employee_action({value:data}))
+  }
+  
+  company_master_dispatch(data: any) {
+    debugger
+    this.comp_master.dispatch(Add_company_action({value:data}))
+  }
+
+  menu_dispatch(data:any){
+    this.Menu.dispatch(Menu_change_action({value:data}))
+  }
+
+  form_dispatch(data:any){
+    this.form.dispatch(Form_change_action({value:data}))
+  }
+  visa_dispatch(data:any){
+    this.visa_search.dispatch(visa_search_action({value:data}))
+  }
+  download_dispatch(data:any){
+    this.download.dispatch(download_type_action({value:data}))
+  }
+  close_dispatch(data:any){
+    this.close_.dispatch(closeform_action({value:data}))
+  }
+
+  update_dispatch(data:any){
+    this.update.dispatch(update_list_action({value:data}))
+  }
+  upload_dispatch(data:any){
+    this.upload.dispatch(invoice_upload_action({value:data}))
+  }
+  emp_store_dispatch(data:any){
+    this.emp_store.dispatch(emp_action({value:data}))
+  }
+  nav_bar_dispatch(data:any){
+    this.nav_bar.dispatch(on_action({value:data}))
+  }
+
+  company_filter_dispatch(data:any){
+    this.company_search.dispatch(company_filter_action({value:data}))
+  }
+  filter_employee_dispatch(data:any){
+    this.filter_emp.dispatch(employee_filter_action({value:data}))
+  }
+  view_employee_dispatch(data:any){
+    this.view.dispatch(view_list_action({value:data}))
+  }
+
+  search_dispatch(data:any){
+    this.search.dispatch(search_action({value:data}))
+
+  }
+
+
+  }
+
+
+
+@Component({
+  selector: 'app-visa',
+  templateUrl: './visa.component.html',
+  styleUrls: ['./visa.component.css'],
+  providers: [
+   
+    { provide: IForm_dispatch, useClass: Form_Dispatch_service },
+    { provide: IForm_select, useClass: Form_select_service },
+    { provide: Passport_Select, useClass: passport_Dispatch_service},
+    { provide: ISELECT, useClass: StoreSelectService },
+    { provide: IDISPATCH, useClass: StoreDispatchService },
+  ]
+})
+
+
+
+    @Inject(IForm_dispatch) private f_dsipatch:IForms_Dispatch,
+    @Inject(IForm_select) private IForm_select:Form_select_service,
+    @Inject(Passport_Select) private passport_store:passport_Dispatch_service,
+    @Inject(ISELECT) private select: StoreSelectService,
+    @Inject(IDISPATCH) private dispatch: StoreDispatchService,
