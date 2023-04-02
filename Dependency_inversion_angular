@@ -22,16 +22,13 @@ export interface IDispatch {
     passport_download_dispatch(data:any):any
     
 } 
+--------------
+export const ISELECT = new InjectionToken<ISelect>('ISelect')
+export const IDISPATCH = new InjectionToken<IDispatch>('IDispatch')
 
-
-
-import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { IDispatch } from './IDispatch';
-
-
-import { Menu_change_action, Form_change_action, visa_search_action, download_type_action, closeform_action, update_list_action, invoice_upload_action, emp_action, on_action, company_filter_action, employee_filter_action, view_list_action, search_action, Add_employee_action, Add_company_action, navigation_action, travel_download_action, visa_download_action, passport_download_action } from './Store.action';
-import { Form_state, visa_search_data, download_type_state, viewdata, close_form_state, update_list, invoice_state, employee_id, navigate_employee, company_name_search, filter_employee, Menu, search_data, get_master_data, navigate_page, donwload } from './Store.state';
+export const IForm_select = new InjectionToken<IForms_Select>('IAir_Forms_Select')
+export const IForm_dispatch = new InjectionToken<IForms_Dispatch>('IAir_Forms_Dispatch')
+---------------
 
 @Injectable({
   providedIn: 'root'
