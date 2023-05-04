@@ -2,3 +2,32 @@ NuGet\Install-Package MySql.EntityFrameworkCore -Version 6.0.13
 NuGet\Install-Package Microsoft.EntityFrameworkCore -Version 6.0.13
 NuGet\Install-Package Microsoft.EntityFrameworkCore.Tools -Version 6.0.13
 NuGet\Install-Package MySql.Data -Version 8.0.33
+NuGet\Install-Package Pomelo.EntityFrameworkCore.MySql -Version 6.0.2
+
+install my sql workbench and mysql installer
+ "ConnectionStrings": {
+    "DefaultConnectionMSSQLNoCred": "Server=DEVSTATION\\MSSQLSERVER2017;Database=TutorialDB;Trusted_Connection=True;MultipleActiveResultSets=true",
+    "DefaultConnectionMySQL": "server=localhost; port=3306; database=TutorialDB; user=root; password=root; Persist Security Info=False; Convert Zero Datetime=True;Allow Zero Datetime=True; Connect Timeout=300"
+  }
+  
+  string _GetConnStringName = builder.Configuration.GetConnectionString("DefaultConnectionMySQL");
+builder.Services.AddDbContextPool<ApplicationDbContext>(options => options.UseMySql(_GetConnStringName, ServerVersion.AutoDetect(_GetConnStringName)));
+datacontext file
+    public class DataContext:DbContext
+    {
+        public DataContext(DbContextOptions<DataContext>options):base(options)
+        {
+
+        }
+            protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
+        public DbSet<Books> books { get; set; }
+    }
+    
+    create service
+    builder.Services.AddDbContext<DataContext>(c =>
+{
+    c.UseMySQL(builder.Configuration.GetConnectionString("data"));
+});
