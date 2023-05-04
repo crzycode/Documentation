@@ -1,0 +1,4 @@
+NuGet\Install-Package MySql.EntityFrameworkCore -Version 6.0.13
+NuGet\Install-Package Microsoft.EntityFrameworkCore -Version 6.0.13
+NuGet\Install-Package Microsoft.EntityFrameworkCore.Tools -Version 6.0.13
+NuGet\Install-Package MySql.Data -Version 8.0.33
