@@ -5,3 +5,6 @@ git commit -m "first commit"
 git branch -M master
 git remote add origin https://github.com/crzycode/Documentation.git
 git push -u origin master
+
+//clone from branch
+git clone -b my-branch git@github.com:user/myproject.git
