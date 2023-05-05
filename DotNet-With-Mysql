@@ -4,6 +4,13 @@ NuGet\Install-Package Microsoft.EntityFrameworkCore.Tools -Version 6.0.13
 NuGet\Install-Package MySql.Data -Version 8.0.33
 NuGet\Install-Package Pomelo.EntityFrameworkCore.MySql -Version 6.0.2
 
+-----------------
+dotnet add package MySql.Data --version 8.0.33
+dotnet add package Microsoft.EntityFrameworkCore.Tools --version 6.0.13
+dotnet add package MySql.EntityFrameworkCore --version 6.0.13
+dotnet add package Pomelo.EntityFrameworkCore.MySql --version 6.0.2
+dotnet add package Microsoft.EntityFrameworkCore --version 6.0.13
+
 install my sql workbench and mysql installer
  "ConnectionStrings": {
     "DefaultConnectionMSSQLNoCred": "Server=DEVSTATION\\MSSQLSERVER2017;Database=TutorialDB;Trusted_Connection=True;MultipleActiveResultSets=true",
