@@ -15,7 +15,8 @@ install my sql workbench and mysql installer
  "ConnectionStrings": {
     "DefaultConnectionMSSQLNoCred": "Server=DEVSTATION\\MSSQLSERVER2017;Database=TutorialDB;Trusted_Connection=True;MultipleActiveResultSets=true",
     "DefaultConnectionMySQL": "server=localhost; port=3306; database=TutorialDB; user=root; password=root; Persist Security Info=False; Convert Zero Datetime=True;Allow Zero Datetime=True; Connect Timeout=300"
-  }
+// "Connect": "server=localhost; port=1433; database=TravelDesk; user=sa; password=panah@321; Persist Security Info=False; Convert Zero Datetime=True;Allow Zero Datetime=True; Connect Timeout=300"
+}
   
   string _GetConnStringName = builder.Configuration.GetConnectionString("DefaultConnectionMySQL");
 builder.Services.AddDbContextPool<ApplicationDbContext>(options => options.UseMySql(_GetConnStringName, ServerVersion.AutoDetect(_GetConnStringName)));
