@@ -1,3 +1,6 @@
+create project
+dotnet new console -n microsoft.botsay -f net6.0
+
 NuGet\Install-Package Microsoft.EntityFrameworkCore.Tools -Version 6.0.12
 NuGet\Install-Package Microsoft.EntityFrameworkCore -Version 6.0.12
 NuGet\Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 6.0.12
