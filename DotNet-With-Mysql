@@ -20,6 +20,8 @@ install my sql workbench and mysql installer
   
   string _GetConnStringName = builder.Configuration.GetConnectionString("DefaultConnectionMySQL");
 builder.Services.AddDbContextPool<ApplicationDbContext>(options => options.UseMySql(_GetConnStringName, ServerVersion.AutoDetect(_GetConnStringName)));
+string _GetConnStringName = builder.Configuration.GetConnectionString("Connect");
+builder.Services.AddDbContextPool<DataContext>(options => options.UseMySql(_GetConnStringName, ServerVersion.AutoDetect(_GetConnStringName)));
 datacontext file
     public class DataContext:DbContext
     {
