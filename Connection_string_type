@@ -1,0 +1,212 @@
+Standard Security
+Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+SQL Server 2008
+SQL Server 2005
+SQL Server 2000
+SQL Server 7.0
+Trusted Connection
+Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+SQL Server 2008
+SQL Server 2005
+SQL Server 2000
+SQL Server 7.0
+Connection to a SQL Server instance
+The server/instance name syntax used in the server option is the same for all SQL Server connection strings.
+
+Server=myServerName\myInstanceName;Database=myDataBase;User Id=myUsername;Password=myPassword;
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+SQL Server 2008
+SQL Server 2005
+SQL Server 2000
+SQL Server 7.0
+Using a non-standard port
+If your SQL Server listens on a non-default port you can specify that using the servername,xxxx syntax (note the comma, it's not a colon).
+
+Server=myServerName,myPortNumber;Database=myDataBase;User Id=myUsername;Password=myPassword;
+The default SQL Server port is 1433 and there is no need to specify that in the connection string.
+
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+SQL Server 2008
+SQL Server 2005
+SQL Server 2000
+SQL Server 7.0
+Connect via an IP address
+Data Source=190.190.200.100,1433;Network Library=DBMSSOCN;Initial Catalog=myDataBase;User ID=myUsername;Password=myPassword;
+DBMSSOCN=TCP/IP is how to use TCP/IP instead of Named Pipes. At the end of the Data Source is the port to use. 1433 is the default port for SQL Server. Read more here.
+
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+SQL Server 2008
+SQL Server 2005
+SQL Server 2000
+SQL Server 7.0
+Enable MARS
+Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;MultipleActiveResultSets=true;
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+SQL Server 2008
+SQL Server 2005
+Attach a database file on connect to a local SQL Server Express instance
+Server=.\SQLExpress;AttachDbFilename=C:\MyFolder\MyDataFile.mdf;Database=dbname;Trusted_Connection=Yes;
+Why is the Database parameter needed? If the named database have already been attached, SQL Server does not reattach it. It uses the attached database as the default for the connection.
+
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+SQL Server 2008
+SQL Server 2005
+Attach a database file, located in the data directory, on connect to a local SQL Server Express instance
+Server=.\SQLExpress;AttachDbFilename=|DataDirectory|mydbfile.mdf;Database=dbname;Trusted_Connection=Yes;
+Why is the Database parameter needed? If the named database have already been attached, SQL Server does not reattach it. It uses the attached database as the default for the connection.
+
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+SQL Server 2008
+SQL Server 2005
+User Instance on local SQL Server Express
+The User Instance feature is deprecated with SQL Server 2012, use the SQL Server Express LocalDB feature instead.
+
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+LocalDB automatic instance
+Server=(localdb)\v11.0;Integrated Security=true;
+The first connection to LocalDB will create and start the instance, this takes some time and might cause a connection timeout failure. If this happens, wait a bit and connect again.
+
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+LocalDB automatic instance with specific data file
+Server=(localdb)\v11.0;Integrated Security=true;AttachDbFileName=C:\MyFolder\MyData.mdf;
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+LocalDB named instance
+To create a named instance, use the SqlLocalDB.exe program. Example SqlLocalDB.exe create MyInstance and SqlLocalDB.exe start MyInstance
+
+Server=(localdb)\MyInstance;Integrated Security=true;
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+LocalDB named instance via the named pipes pipe name
+The Server=(localdb) syntax is not supported by .NET framework versions before 4.0.2. However the named pipes connection will work to connect pre 4.0.2 applications to LocalDB instances.
+
+Server=np:\\.\pipe\LOCALDB#F365A78E\tsql\query;
+Executing SqlLocalDB.exe info MyInstance will get you (along with other info) the instance pipe name such as "np:\\.\pipe\LOCALDB#F365A78E\tsql\query".
+
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+LocalDB shared instance
+Both automatic and named instances of LocalDB can be shared.
+
+Server=(localdb)\.\MyInstanceShare;Integrated Security=true;
+Use SqlLocalDB.exe to share or unshare an instance. For example execute SqlLocalDB.exe share "MyInstance" "MyInstanceShare" to share an instance.
+
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+Database mirroring
+If you connect with ADO.NET or the SQL Native Client to a database that is being mirrored, your application can take advantage of the drivers ability to automatically redirect connections when a database mirroring failover occurs. You must specify the initial principal server and database in the connection string and the failover partner server.
+
+Data Source=myServerAddress;Failover Partner=myMirrorServerAddress;Initial Catalog=myDataBase;Integrated Security=True;
+There is ofcourse many other ways to write the connection string using database mirroring, this is just one example pointing out the failover functionality. You can combine this with the other connection strings options available.
+
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+SQL Server 2008
+SQL Server 2005
+Asynchronous processing
+A connection to SQL Server that allows for the issuing of async requests through ADO.NET objects.
+
+Server=myServerAddress;Database=myDataBase;Integrated Security=True;Asynchronous Processing=True;
+See also the List of all SqlConnection connection string properties
+
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+SQL Server 2008
+SQL Server 2005
+Using an User Instance on a local SQL Server Express instance
+The User Instance functionality creates a new SQL Server instance on the fly during connect. This works only on a local SQL Server instance and only when connecting using windows authentication over local named pipes. The purpose is to be able to create a full rights SQL Server instance to a user with limited administrative rights on the computer.
+
+Data Source=.\SQLExpress;Integrated Security=true;AttachDbFilename=C:\MyFolder\MyDataFile.mdf;User Instance=true;
+To use the User Instance functionality you need to enable it on the SQL Server. This is done by executing the following command: sp_configure 'user instances enabled', '1'. To disable the functionality execute sp_configure 'user instances enabled', '0'.
+
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2008
+SQL Server 2005
+Specifying packet size
+Server=myServerAddress;Database=myDataBase;User ID=myUsername;Password=myPassword;Trusted_Connection=False;Packet Size=4096;
+By default, the Microsoft .NET Framework Data Provider for SQL Server sets the network packet size to 8192 bytes. This might however not be optimal, try to set this value to 4096 instead. The default value of 8192 might cause Failed to reserve contiguous memory errors as well, read more here.
+
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+SQL Server 2014
+SQL Server 2012
+SQL Server 2008
+SQL Server 2005
+SQL Server 2000
+SQL Server 7.0
+Always Encrypted
+Data Source=myServer;Initial Catalog=myDB;Integrated Security=true;Column Encryption Setting=enabled;
+This one is available in .NET Core (as opposed to System.Data.SqlClient).
+
+SQL Server 2019
+SQL Server 2017
+SQL Server 2016
+Azure SQL Database
+Always Encrypted with secure enclaves
+Data Source=myServer;Initial Catalog=myDB;Integrated Security=true;Column Encryption Setting=enabled;Enclave Attestation Url=http://hgs.bastion.local/Attestation;
+This one is available in .NET Core (as opposed to System.Data.SqlClient).
+
