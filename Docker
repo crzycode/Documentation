@@ -1,0 +1,2 @@
+install and run Lates Sql container
+docker run -d --name panah -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=panah@123' -p 1433:1433 mcr.microsoft.com/mssql/server:2022-latest
