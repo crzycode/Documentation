@@ -17,7 +17,8 @@ create datacontext
         {
 
         }
-
+        work with existing database
+Scaffold-DbContext "Data Source=DESKTOP-H20O12E;Initial Catalog=Northwind;Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 create middleware ------------------------->
 builder.Services.AddDbContext<DataContext>(options =>
 {
