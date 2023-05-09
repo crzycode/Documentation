@@ -8,6 +8,7 @@ NuGet\Install-Package Aspose.Cells -Version 23.4.0
 dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 6.0.16
  dotnet add package Microsoft.AspNetCore.Identity --version 2.2.0
  dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore --version 6.0.16
+ https://github.com/rd003/DotNet6-jwt-refresh-tokens
 
 create connection string ------------------------>
  "ConnectionStrings": {
