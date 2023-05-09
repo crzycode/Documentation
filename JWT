@@ -1,0 +1,88 @@
+
+
+middleware in program.cs file
+
+builder.Services.AddSwaggerGen(opt =>{
+     opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MyAPI", Version = "v1" });
+    opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "bearer"
+    });
+    opt.AddSecurityRequirement(new OpenApiSecurityRequirement{
+        {
+            new OpenApiSecurityScheme{
+                Reference = new OpenApiReference{
+                     Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            new string[]{}
+        }
+    });
+});
+
+
+
+--------------
+
+builder.Services.AddAuthentication(options =>{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(option =>{
+option.TokenValidationParameters = new TokenValidationParameters{
+ValidateIssuer = true,
+ValidateAudience = true,
+ValidateLifetime = true,
+ValidIssuer = builder.Configuration["Jwt:Issuer"],
+ValidAudience = builder.Configuration["Jwt:Audience"],
+IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+};
+});
+builder.Services.AddAuthorization();
+
+
+app.UseAuthentication();
+app.UseAuthorization();
+-----------
+function to generate token
+
+
+   public string Generate_token(Login l){
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(iconfiguration["Jwt:Key"]));
+        var credentials = new SigningCredentials(securityKey,SecurityAlgorithms.HmacSha256);
+        var token = new JwtSecurityToken(iconfiguration["Jwt:Issuer"],iconfiguration["Jwt:Audience"],null,
+        expires:DateTime.Now.AddMinutes(1),
+        signingCredentials:credentials
+         );
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+    
+    other------
+    
+    
+        var data = db.users.Where(c => c.Email_address == l.Username).ToList();
+            if (data.Any(x => x.Email_address == l.Username && x.Password == l.Password))
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var tokenKey = Encoding.UTF8.GetBytes(iconfiguration["JWT:Key"]);
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                  {
+             new Claim(ClaimTypes.Email, l.Username)
+                  }),
+                    Expires = DateTime.UtcNow.AddMinutes(1),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                return new Tokens { Token = tokenHandler.WriteToken(token) };
+
+            }else{
+                return null;
+            }
