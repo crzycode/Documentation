@@ -11,6 +11,15 @@ dotnet add package MySql.EntityFrameworkCore --version 6.0.13
 dotnet add package Pomelo.EntityFrameworkCore.MySql --version 6.0.2
 dotnet add package Microsoft.EntityFrameworkCore --version 6.0.13
 
+dotnet ef dbcontext scaffold "connection-string" MySql.EntityFrameworkCore -o sakila -t actor -t film -t film_actor -t language -f
+
+  // "connection":"Server=mverse-iota.chjndnwgybfy.ap-south-1.rds.amazonaws.com; Database=mverse; User Id=mangal; Password=mangal@321"
+    //Scaffold-DbContext "Data Source=DESKTOP-H20O12E;Initial Catalog=Northwind;Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+    //dotnet ef dbcontext scaffold "Server=mverse-iota.chjndnwgybfy.ap-south-1.rds.amazonaws.com; port=3306; Database=mverse;User=mangal;Password=mangal@321;" "Pomelo.EntityFrameworkCore.MySql" -t personsView -o models
+    //dotnet ef dbcontext scaffold "Server=mverse-iota.chjndnwgybfy.ap-south-1.rds.amazonaws.com; port=3306; Database=mverse;User=mangal;Password=mangal@321;" MySql.EntityFrameworkCore -o sakila -f
+
+
+
 install my sql workbench and mysql installer
  "ConnectionStrings": {
     "DefaultConnectionMSSQLNoCred": "Server=DEVSTATION\\MSSQLSERVER2017;Database=TutorialDB;Trusted_Connection=True;MultipleActiveResultSets=true",
