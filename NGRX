@@ -1,0 +1,21 @@
+
+
+export function clearState(reducer:any) {
+  return function (state:any, action:any) {
+
+    if (action.type === ActionTypes.LOGOUT) {
+      state = undefined;
+    }
+
+    return reducer(state, action);
+  };
+}
+export class ActionTypes {
+  static LOGOUT = "[App] logout";
+}
+
+export class Logout implements Action {
+  readonly type = ActionTypes.LOGOUT;
+}
+
+this.store_.dispatch(new Logout())
